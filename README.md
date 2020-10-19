@@ -334,6 +334,7 @@ I'd be happy to know more about you and what you are doing. If you want to share
 ## License
 
 Copyright © 2020 Gergely Bódi (@vendelin8)
+
 Original project copyright © 2019-2020 Radosław Kozieł (@panr)
 
 The theme is released under the MIT License. Check the [original theme license](https://github.com/vendelin8/hugo-theme-hello-tricolor/blob/master/LICENSE.md) for additional licensing information.
