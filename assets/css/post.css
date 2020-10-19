@@ -51,9 +51,9 @@
   }
 
   &-cover {
-    margin: 40px -50px;
-    width: 860px;
-    max-width: 860px;
+    margin: 40px auto;
+    width: 760px;
+    max-width: 780px;
 
     img {
       margin: 0 auto;

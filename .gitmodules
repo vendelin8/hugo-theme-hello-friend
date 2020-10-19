@@ -1,0 +1,3 @@
+[submodule "exampleSite/themes/hello-friend"]
+	path = exampleSite/themes/hello-friend
+	url = https://github.com/panr/hugo-theme-hello-friend.git

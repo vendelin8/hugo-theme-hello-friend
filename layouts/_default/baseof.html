@@ -9,8 +9,45 @@
       </title>
     {{ end }}
     {{ partial "head.html" . }}
+
+  {{- block "custom_head" . -}}
+  {{- end -}}
+  {{- $backgroundColorDefault := .Scratch.Get "backgroundColorDefault" -}}
+  {{- $backgroundColor := .Scratch.Get "backgroundColor" -}}
+  {{- $color := .Scratch.Get "color" -}}
+  {{- $backgroundImage := "" -}}
+  {{- $bodyStyle := .Scratch.Get "bodyStyle" -}}
+  {{- $style := .Scratch.Get "style" -}}
+  {{- $styleSheet := .Scratch.Get "styleSheet" -}}
+  {{- with .Scratch.Get "backgroundImage" -}}
+    {{- $backgroundImage = (printf `url("%s")` (. | absURL)) -}}
+  {{- end -}}
+  <style>body.colored-theme{
+      {{- with $backgroundColor -}}
+        --header: {{- . | safeCSS }};--background: {{- . | safeCSS -}};
+      {{- else -}}
+        --header: {{- $backgroundColorDefault | safeCSS }};--background: {{- $backgroundColorDefault | safeCSS -}};
+      {{- end -}}
+      {{- with $backgroundImage -}}
+        background-image: {{- . | safeCSS -}};
+      {{- end -}}
+      {{- with $color -}}
+        color: {{- . }};
+      {{- end -}}
+      {{- with $bodyStyle -}}
+        {{- . | safeCSS -}};
+      {{- end -}}
+    }
+    {{- $style | safeCSS -}}
+  </style>
+  {{- with $styleSheet -}}
+    <link rel="stylesheet" href="{{ printf "css/%s.css" $styleSheet | absURL | safeURL}}" />
+  {{- end -}}
   </head>
-  <body class="{{ if ne $.Site.Params.defaultTheme "light" -}} dark-theme {{- end -}}">
+  <body class="
+    {{- if eq $.Site.Params.defaultTheme "dark" -}} dark-theme
+      {{- else if eq $.Site.Params.defaultTheme "colored" -}} colored-theme
+    {{- end -}}">
     <div class="container">
       {{ partial "header.html" . }}
 

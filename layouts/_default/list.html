@@ -29,7 +29,7 @@
         {{ if .Params.tags }}
           <span class="post-tags">
             {{ range .Params.tags }}
-              <a href="{{ (urlize (printf "tags/%s" . )) | absURL }}/">#{{ . }}</a>&nbsp;
+              <a href="{{ (urlize (printf "%s/%s" (or $.Site.Params.CustomTags "tags") . )) | absURL }}/">#{{ . }}</a>&nbsp;
             {{ end }}
           </span>
         {{ end }}
@@ -68,4 +68,18 @@
     {{ end }}
     {{ partial "pagination.html" . }}
   </div>
+{{ end }}
+
+{{ define "custom_head" }}
+  {{ .Scratch.Set "backgroundColorDefault" "darkblue" }}
+  {{ .Scratch.Set "backgroundColor" $.Site.Params.List.BackgroundColor }}
+  {{ with $.Site.Params.List.Color }}
+    {{ $.Scratch.Set "color" . }}
+  {{ else }}
+    {{ .Scratch.Set "color" "white" }}
+  {{ end }}
+  {{ .Scratch.Set "backgroundImage" $.Site.Params.List.BackgroundImage }}
+  {{ .Scratch.Set "bodyStyle" $.Site.Params.List.BodyStyle }}
+  {{ .Scratch.Set "style" $.Site.Params.List.Style }}
+  {{ .Scratch.Set "styleSheet" $.Site.Params.List.StyleSheet }}
 {{ end }}

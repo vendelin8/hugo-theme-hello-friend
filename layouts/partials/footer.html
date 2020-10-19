@@ -11,7 +11,7 @@
         >
         <span
           >Theme created by
-          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a>&nbsp;and vendelin8</span
         >
       </div>
     {{ end }}
@@ -19,6 +19,8 @@
 </footer>
 
 <script src="{{ "assets/main.js" | absURL }}"></script>
-<script src="{{ "assets/prism.js" | absURL }}"></script>
+{{ if $.Param "addPrism" -}}
+  <script src="{{ "assets/prism.js" | absURL }}"></script>
+{{- end -}}
 
 {{- partial "extended_footer.html" . }}

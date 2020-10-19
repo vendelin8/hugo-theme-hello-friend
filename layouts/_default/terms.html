@@ -17,3 +17,13 @@
     </ul>
   </div>
 {{ end }}
+
+{{ define "custom_head" }}
+  {{ .Scratch.Set "backgroundColorDefault" "red" }}
+  {{ .Scratch.Set "backgroundColor" $.Site.Params.Terms.BackgroundColor }}
+  {{ .Scratch.Set "color" $.Site.Params.Terms.Color }}
+  {{ .Scratch.Set "backgroundImage" $.Site.Params.Terms.BackgroundImage }}
+  {{ .Scratch.Set "bodyStyle" $.Site.Params.Terms.BodyStyle }}
+  {{ .Scratch.Set "style" $.Site.Params.Terms.Style }}
+  {{ .Scratch.Set "styleSheet" $.Site.Params.Terms.StyleSheet }}
+{{ end }}

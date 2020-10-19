@@ -2,7 +2,7 @@
   "name": "hello-friend",
   "version": "2.1.0",
   "main": "index.js",
-  "author": "Radosław Kozieł <@panr> <radoslaw.koziel@gmail.com>",
+  "author": "Gergely Bódi <@vendelin8> <vendelin8@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "webpack --mode=development --watch",

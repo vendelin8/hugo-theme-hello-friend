@@ -1,18 +1,34 @@
 // Toggle theme
 
-const getTheme = window.localStorage && window.localStorage.getItem("theme");
-const themeToggle = document.querySelector(".theme-toggle");
-const isDark = getTheme === "dark";
-
-if (getTheme !== null) {
-  document.body.classList.toggle("dark-theme", isDark);
+var currentTheme = window.localStorage && window.localStorage.getItem("theme");
+if (currentTheme === "null") {
+  currentTheme = null;
+}
+currentTheme = currentTheme || "colored";
+if (currentTheme !== "colored") {
+  document.body.classList.remove("colored-theme");
 }
 
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-theme");
-  window.localStorage &&
-    window.localStorage.setItem(
-      "theme",
-      document.body.classList.contains("dark-theme") ? "dark" : "light",
-    );
+function toggleTheme() {
+  if (currentTheme !== "light") {
+    document.body.classList.add(currentTheme + "-theme");
+  }
+}
+toggleTheme();
+
+document.querySelector(".theme-toggle").addEventListener("click", () => {
+  document.body.classList.remove(currentTheme + "-theme");
+  switch (currentTheme) {
+    case "dark":
+      currentTheme = "colored";
+      break;
+    case "colored":
+      currentTheme = "light";
+      break;
+    case "light":
+      currentTheme = "dark";
+      break;
+  }
+  toggleTheme();
+  window.localStorage && window.localStorage.setItem("theme", currentTheme);
 });

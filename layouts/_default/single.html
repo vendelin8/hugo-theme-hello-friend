@@ -33,7 +33,7 @@
     {{ if .Params.tags }}
       <span class="post-tags">
         {{ range .Params.tags }}
-          <a href="{{ (urlize (printf "tags/%s" . )) | absURL }}/">#{{ . }}</a>&nbsp;
+          <a href="{{ (urlize (printf "%s/%s" (or $.Site.Params.CustomTags "tags") . )) | absURL }}/">#{{ . }}</a>&nbsp;
         {{ end }}
       </span>
     {{ end }}
@@ -41,9 +41,9 @@
     {{ if .Params.Cover }}
       <figure class="post-cover">
         {{ if .Params.UseRelativeCover }}
-          <img src="{{ (printf "%s%s" .Permalink .Params.Cover ) }}" alt="{{ .Params.CoverAlt | plainify | default .Title }}" />
+          <img src="{{ (printf "%s%s" .Permalink .Params.Cover ) }}" alt="{{ .Params.CoverAlt | plainify | default .Title }}" title="{{ .Params.CoverAlt }}" />
         {{ else }}
-          <img src="{{ .Params.Cover | absURL }}" alt="{{ .Params.CoverAlt | plainify | default .Title }}" />
+          <img src="{{ .Params.Cover | absURL }}" alt="{{ .Params.CoverAlt | plainify | default .Title }}" title="{{ .Params.CoverAlt }}" />
         {{ end }}
 
         {{ if .Params.CoverCaption }}
@@ -96,4 +96,14 @@
       {{ end }}
     {{ end }}
   </div>
+{{ end }}
+
+{{ define "custom_head" }}
+  {{- .Scratch.Set "backgroundColorDefault" "yellow" }}
+  {{- .Scratch.Set "backgroundColor" $.Site.Params.Single.BackgroundColor }}
+  {{- .Scratch.Set "color" $.Site.Params.Single.Color }}
+  {{- .Scratch.Set "backgroundImage" $.Site.Params.Single.BackgroundImage }}
+  {{- .Scratch.Set "bodyStyle" $.Site.Params.Single.BodyStyle }}
+  {{- .Scratch.Set "style" $.Site.Params.Single.Style }}
+  {{- .Scratch.Set "styleSheet" .Params.StyleSheet }}
 {{ end }}

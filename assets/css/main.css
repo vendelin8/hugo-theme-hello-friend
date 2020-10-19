@@ -142,7 +142,6 @@ code, kbd {
 }
 
 pre {
-  background: #212020;
   padding: 20px;
   border-radius: 8px;
   font-size: .9rem;
@@ -160,6 +159,11 @@ pre {
     padding: 0;
     font-size: inherit;
   }
+}
+
+body.dark-theme pre {
+  /* dark theme colors */
+  background: #444 !important;
 }
 
 blockquote {

@@ -41,7 +41,7 @@
       {{ if .Params.tags }}
         <span class="post-tags">
           {{ range .Params.tags }}
-            <a href="{{ (urlize (printf "tags/%s" . )) | absURL }}/">#{{ . }}</a>&nbsp;
+            <a href="{{ (urlize (printf "%s/%s" (or $.Site.Params.CustomTags "tags") . )) | absURL }}/">#{{ . }}</a>&nbsp;
           {{ end }}
         </span>
       {{ end }}
@@ -49,9 +49,9 @@
       {{ if .Params.Cover }}
         <figure class="post-cover">
           {{ if .Params.UseRelativeCover }}
-            <img src="{{ (printf "%s%s" .Permalink .Params.Cover ) }}" alt="{{ .Params.CoverAlt | plainify | default .Title }}"/>
+            <img src="{{ (printf "%s%s" .Permalink .Params.Cover ) }}" alt="{{ .Params.CoverAlt | plainify | default .Title }}" title="{{ .Params.CoverAlt }}"/>
           {{ else }}
-            <img src="{{ .Params.Cover | absURL }}" alt="{{ .Params.CoverAlt | plainify | default .Title }}"/>
+            <img src="{{ .Params.Cover | absURL }}" alt="{{ .Params.CoverAlt | plainify | default .Title }}" title="{{ .Params.CoverAlt }}"/>
           {{ end }}
 
           {{ if .Params.CoverCaption }}
@@ -76,4 +76,14 @@
     {{ end }}
     {{ partial "pagination.html" . }}
   </div>
+{{ end }}
+
+{{ define "custom_head" }}
+  {{ .Scratch.Set "backgroundColorDefault" "lightgreen" }}
+  {{ .Scratch.Set "backgroundColor" $.Site.Params.Index.BackgroundColor }}
+  {{ .Scratch.Set "color" $.Site.Params.Index.Color }}
+  {{ .Scratch.Set "backgroundImage" $.Site.Params.Index.BackgroundImage }}
+  {{ .Scratch.Set "bodyStyle" $.Site.Params.Index.BodyStyle }}
+  {{ .Scratch.Set "style" $.Site.Params.Index.Style }}
+  {{ .Scratch.Set "styleSheet" $.Site.Params.Index.StyleSheet }}
 {{ end }}

@@ -1,21 +1,21 @@
 {{ define "main" }}
   <div class="post">
     <h1 class="post-title">
-      <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+      <a href="{{ .Permalink }}">{{ (or $.Site.Params._404.Title .Title) | markdownify }}</a>
     </h1>
     <div class="post-content">
       <p>
-        {{ "Hmm... Sorry, this page seems to be missing." | markdownify }}
+        {{ (or $.Site.Params._404.SubTitle "Hmm... Sorry, this page seems to be missing.") | markdownify }}
       </p>
 
-      {{ if .Site.Taxonomies.tags }}
+      {{ if $.Site.Taxonomies.tags }}
         <p>
-          {{ "Maybe these tags will help you find what you're looking for. :smile:" | markdownify | emojify }}
+          {{ (print (or $.Site.Params._404.TagsHeader "Maybe these tags will help you find what you're looking for.") " :smile:") | markdownify | emojify }}
         </p>
-        <h2>Tags</h2>
+        <h2>{{ (or $.Site.Params._404.TagsTitle "Tags") | markdownify }}</h2>
         <div class="terms">
           <ul class="terms__list">
-            {{ range .Site.Taxonomies.tags }}
+            {{ range $.Site.Taxonomies.tags }}
               <li class="terms__term">
                 <a href="{{ .Page.Permalink }}">#{{ .Page.Title }}</a
                 ><span class="terms__term-count">{{ .Count }}</span>
@@ -26,4 +26,14 @@
       {{ end }}
     </div>
   </div>
+{{ end }}
+
+{{ define "custom_head" }}
+  {{ .Scratch.Set "backgroundColorDefault" "orange" }}
+  {{ .Scratch.Set "backgroundColor" $.Site.Params._404.BackgroundColor }}
+  {{ .Scratch.Set "color" $.Site.Params._404.Color }}
+  {{ .Scratch.Set "backgroundImage" $.Site.Params._404.BackgroundImage }}
+  {{ .Scratch.Set "bodyStyle" $.Site.Params._404.BodyStyle }}
+  {{ .Scratch.Set "style" $.Site.Params._404.Style }}
+  {{ .Scratch.Set "styleSheet" $.Site.Params._404.StyleSheet }}
 {{ end }}

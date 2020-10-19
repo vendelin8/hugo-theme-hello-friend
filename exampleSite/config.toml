@@ -1,17 +1,35 @@
-baseurl = "/"
+# baseURL = "http://localhost/demo/public/"
+baseURL = "https://example.com"
 languageCode = "en-us"
-theme = "hugo-theme-hello-friend"
+theme = "hello-tricolor"
 paginate = 5
+title = "Hello tricolor demo"
+dateFormatSingle = "2006-01-02"
+dateFormatList = "2006-01-02"
+disableKinds = ["categories"]
+
+[taxonomies]
+  tag = "tags"
+
+[languages.en.menu]
+  [[languages.en.menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about"
+  [[languages.en.menu.main]]
+    identifier = "showcase"
+    name = "Showcase"
+    url = "/showcase"
 
 [params]
   # dir name of your blog content (default is `content/posts`)
   contentTypeName = "post"
-  # "light" or "dark"
-  defaultTheme = "dark"
+  # "light", "dark" or "colored"
+  defaultTheme = "colored"
   # if you set this to 0, only submenu trigger will be visible
   showMenuItems = 2
   # Enable to show reading time in minutes for posts
-  showReadingTime = false
+  showReadingTime = true
 
 [languages]
   [languages.en]
@@ -30,19 +48,10 @@ paginate = 5
     dateFormatList = "2006-01-02"
 
     [languages.en.params.logo]
-      logoText = "hello friend"
+      logoText = "hello tricolor"
       logoHomeLink = "/"
     # or
     #
     # path = "/img/your-example-logo.svg"
     # alt = "Your example logo alt text"
 
-    [languages.en.menu]
-      [[languages.en.menu.main]]
-        identifier = "about"
-        name = "About"
-        url = "/about"
-      [[languages.en.menu.main]]
-        identifier = "showcase"
-        name = "Showcase"
-        url = "/showcase"
